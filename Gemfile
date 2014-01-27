@@ -47,3 +47,5 @@ end
 gem 'devise'
 
 gem 'foundation-rails'
+
+gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'

@@ -1,0 +1,13 @@
+<h1><%= @package.name %></h1>
+<div class="row">
+  <div class="small-12 large-12 columns">
+    <ul class="pricing-table">
+      <li class="title"><%= @package.name %></li>
+      <li class="price">£<%= @package.amount.to_f/100 %></li>
+      <li class="description"><%= @package.description %></li>
+      <li class="bullet-item"><%= @package.amount %> Evvnt</li>
+      <li class="bullet-item">5GB Storage</li>
+      <li class="bullet-item">20 Users</li>
+    </ul>
+  </div>
+</div>

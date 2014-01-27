@@ -1,0 +1,36 @@
+<% if user_signed_in? %>
+  <h1>Please select your package below</h1>
+  <div class="row">
+    <% Package.order(:id).each do |package| %>
+      <div class="small-4 large-4 columns">
+        <%= form_tag purchase_path(package) do %>
+          <h2><%= package.name %></h2>
+          <ul class="pricing-table">
+            <li class="title"><%= package.name %></li>
+            <li class="price">£<%= package.amount.to_f/100 %></li>
+            <li class="description"><%= package.description %></li>
+            <li class="bullet-item"><%= package.amount %> Evvnt</li>
+            <li class="bullet-item">5GB Storage</li>
+            <li class="bullet-item">20 Users</li>
+            <li class="cta-button">
+              <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                  data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                  data-name="<%= package.name %>"
+                  data-description="<%= package.description %>"
+                  data-panel-label="Pay {{amount}}"
+                  data-label="Buy Now"
+                  data-email=<%= current_user.email %>
+                  data-currency="GBP"
+                  data-amount="<%= package.amount %>"></script>
+            </li>
+          </ul>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <h1>Join us!</h1>
+  <p>Please click below to register or sign in if you already have an account</p>
+  <%= link_to 'Register', new_user_registration_path, class: 'button' %>
+  <%= link_to 'Sign in', new_user_session_path %>
+<% end %>
